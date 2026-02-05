@@ -43,7 +43,7 @@ body {
 .hand {
   height: 0.1875rem;
   width: 50%;
-  background: oklch(0.9475 0.1916 119.15);
+  background: oklch(96.478% 0.18029 108.353);
   border-radius: 0.1875rem;
   position: absolute;
   top: 50%;
@@ -55,5 +55,5 @@ body {
 }
 
 .hand.inactive {
-  opacity: 0.3;
+  opacity: 0.2;
 }
