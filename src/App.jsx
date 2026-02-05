@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import Digit from './components/Digit';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const getTimeDigits = () => {
+    let hours = time.getHours();
+    hours = hours % 12;
+    hours = hours ? hours : 12; 
+
+    const hStr = hours.toString().padStart(2, '0');
+    const mStr = time.getMinutes().toString().padStart(2, '0');
+    const sStr = time.getSeconds().toString().padStart(2, '0');
+
+    return { hStr, mStr, sStr };
+  };
+
+  const { hStr, mStr, sStr } = getTimeDigits();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="main-clock">
+      <div className="time-group">
+        <Digit value={hStr[0]} />
+        <Digit value={hStr[1]} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="time-group">
+        <Digit value={mStr[0]} />
+        <Digit value={mStr[1]} />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      <div className="time-group">
+        <Digit value={sStr[0]} />
+        <Digit value={sStr[1]} />
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;
