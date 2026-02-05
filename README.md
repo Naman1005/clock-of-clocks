@@ -1,16 +1,39 @@
-# React + Vite
+# Clock of Clocks
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A kinetic digital clock display where each digit is constructed from a grid of 24 individual analog clocks. The hands of the micro-clocks rotate to form the shape of the numbers (0-9) dynamically.
 
-Currently, two official plugins are available:
+## Implementation Details
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Framework:** React + Vite
+- **Styling:** Pure CSS (Grid/Flexbox) with OKLCH color space
 
-## React Compiler
+### Logic:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **AnalogClock:** Base unit rendering two hands.
+- **Digit:** A 6x4 grid of base units forming a single number.
+- **App:** Main controller syncing time state with the grid.
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Clone the repository:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/clock-of-clocks.git
+cd clock-of-clocks
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run locally:
+
+```bash
+npm run dev
+```
+
+## Pattern Logic
+
+The project uses a mapped coordinate system where every digit (0-9) is an array of 24 characters. Each character corresponds to a specific angle configuration for the clock hands (e.g., "┌" sets hands to 0° and 90°).
