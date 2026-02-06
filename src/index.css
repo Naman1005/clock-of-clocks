@@ -2,49 +2,53 @@
   font-family: 'Inter', sans-serif;
   background-color: oklch(10% 0 0);
   color: white;
+  --base-size: min(3rem, 3.2vw);
 }
 
 body {
   margin: 0;
-  display: grid; 
+  display: grid;
   place-content: center;
   min-height: 100vh;
 }
 
-/* Container for HH:MM:SS */
 .main-clock {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; 
   justify-content: center;
-  gap: 2rem;
+  align-items: center;
+  gap: calc(var(--base-size) * 0.8);
   padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .time-group {
   display: flex;
-  gap: 0.5rem;
+  gap: calc(var(--base-size) * 0.2);
 }
 
 .digit {
   display: grid;
   grid-template: repeat(6, 1fr) / repeat(4, 1fr);
-  gap: 0.125rem;
+  gap: calc(var(--base-size) / 24);
 }
 
 .clock {
-  height: 3rem;
-  width: 3rem;
+  height: var(--base-size);
+  width: var(--base-size);
   background: oklch(20% 0 0);
-  border: 0.25rem solid oklch(30% 0 0);
+  border: calc(var(--base-size) / 12) solid oklch(30% 0 0);
   border-radius: 50%;
   position: relative;
+  box-sizing: border-box;
 }
 
 .hand {
-  height: 0.1875rem;
+  height: calc(var(--base-size) / 16);
   width: 50%;
-  background: oklch(96.478% 0.18029 108.353);
-  border-radius: 0.1875rem;
+  background: oklch(0.9475 0.1916 119.15);
+  border-radius: calc(var(--base-size) / 16);
   position: absolute;
   top: 50%;
   left: 50%;
