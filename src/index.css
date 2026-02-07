@@ -1,8 +1,17 @@
 :root {
   font-family: 'Inter', sans-serif;
-  background-color: oklch(10% 0 0);
-  color: white;
   --base-size: min(3rem, 3.2vw);
+  --bg-body: oklch(10% 0 0);
+  --bg-clock: oklch(20% 0 0);
+  --border-clock: oklch(30% 0 0);
+  --hand-color: oklch(0.9475 0.1916 119.15);
+}
+
+[data-theme="light"] {
+  --bg-body: oklch(96% 0 0);
+  --bg-clock: oklch(93% 0 0);
+  --border-clock: oklch(85% 0 0);
+  --hand-color: oklch(0% 0 0);
 }
 
 body {
@@ -10,17 +19,22 @@ body {
   display: grid;
   place-content: center;
   min-height: 100vh;
+  background-color: var(--bg-body);
+  transition: background-color 600ms ease;
 }
 
 .main-clock {
   display: flex;
-  flex-wrap: nowrap; 
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   gap: calc(var(--base-size) * 0.8);
   padding: 1rem;
   width: 100%;
   box-sizing: border-box;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 .time-group {
@@ -37,27 +51,28 @@ body {
 .clock {
   height: var(--base-size);
   width: var(--base-size);
-  background: oklch(20% 0 0);
-  border: calc(var(--base-size) / 12) solid oklch(30% 0 0);
+  background: var(--bg-clock);
+  border: calc(var(--base-size) / 12) solid var(--border-clock);
   border-radius: 50%;
   position: relative;
   box-sizing: border-box;
+  transition: background 600ms ease, border-color 600ms ease;
 }
 
 .hand {
   height: calc(var(--base-size) / 16);
   width: 50%;
-  background: oklch(0.9475 0.1916 119.15);
+  background: var(--hand-color);
   border-radius: calc(var(--base-size) / 16);
   position: absolute;
   top: 50%;
   left: 50%;
   translate: 0% -50%;
   transform-origin: center left;
-  transition: rotate 400ms cubic-bezier(.4, 0, .2, 1), opacity 400ms ease-out;
+  transition: rotate 400ms cubic-bezier(.4, 0, .2, 1), opacity 400ms ease-out, background-color 600ms ease;
   opacity: 1;
 }
 
 .hand.inactive {
-  opacity: 0.2;
+  opacity: 0.15;
 }

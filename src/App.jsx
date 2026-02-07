@@ -3,6 +3,15 @@ import Digit from './components/Digit';
 
 function App() {
   const [time, setTime] = useState(new Date());
+  const [theme, setTheme] = useState("dark");
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  };
+
+  useEffect(() => {
+    document.body.setAttribute("data-theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -26,7 +35,7 @@ function App() {
   const { hStr, mStr, sStr } = getTimeDigits();
 
   return (
-    <div className="main-clock">
+    <div className="main-clock" onClick={toggleTheme}>
       <div className="time-group">
         <Digit value={hStr[0]} />
         <Digit value={hStr[1]} />
